@@ -4,21 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" data-i18n-attr="content:meta.desc" content="CNC Studio 精密数控加工工作室，专注五轴联动铣削、车铣复合、慢走丝线切割。±0.005mm 精度，服务航空航天、医疗器械、精密仪器等领域。">
-<title data-i18n>CNC STUDIO | 精密数控加工</title>
+<title data-i18n="meta.title">CNC STUDIO | 精密数控加工 — 五轴铣削·车铣复合·线切割</title>
 
-<!-- Fonts: Inter (Latin) + Noto Sans SC (Chinese) + Share Tech Mono (technical) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
-/* ═══════════════════════════════════════════
-   CNC STUDIO — Design System
-   Industrial Precision Aesthetic
-   ═══════════════════════════════════════════ */
-
 :root {
-  /* ── Color Tokens ── */
   --color-bg:          #0c0d11;
   --color-bg-warm:      #111318;
   --color-surface:      #15171e;
@@ -26,23 +19,17 @@
   --color-elevated:     #1e212b;
   --color-border:       #252832;
   --color-border-strong:#363a47;
-
   --color-primary:      #e6e8ec;
   --color-secondary:    #959da6;
   --color-muted:        #5a6270;
   --color-inverse:      #0c0d11;
-
   --color-accent:       #f08800;
   --color-accent-light: #ffb443;
   --color-accent-soft:  rgba(240,136,0,0.08);
   --color-accent-glow:  rgba(240,136,0,0.2);
-
-  /* ── Typography ── */
   --font-heading: 'Noto Sans SC', 'Inter', system-ui, sans-serif;
   --font-body:    'Noto Sans SC', 'Inter', system-ui, sans-serif;
   --font-mono:    'Share Tech Mono', 'SF Mono', 'JetBrains Mono', monospace;
-
-  /* ── Type Scale ── */
   --text-xs:   0.7rem;
   --text-sm:   0.82rem;
   --text-base: 0.95rem;
@@ -52,70 +39,34 @@
   --text-3xl:  2rem;
   --text-4xl:  2.6rem;
   --text-5xl:  3.4rem;
-
-  /* ── Spacing (8px grid) ── */
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-5:  24px;
-  --space-6:  32px;
-  --space-7:  40px;
-  --space-8:  48px;
-  --space-9:  64px;
-  --space-10: 80px;
-  --space-11: 128px;
-
-  /* ── Borders ── */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --radius-full: 9999px;
-
-  /* ── Shadows ── */
+  --space-1:  4px;  --space-2:  8px;  --space-3:  12px;
+  --space-4:  16px; --space-5:  24px; --space-6:  32px;
+  --space-7:  40px; --space-8:  48px; --space-9:  64px;
+  --space-10: 80px; --space-11: 128px;
+  --radius-sm: 2px; --radius-md: 4px; --radius-lg: 8px;
+  --radius-xl: 12px; --radius-full: 9999px;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
   --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
   --shadow-glow: 0 0 30px rgba(240,136,0,0.15);
-
-  /* ── Transitions ── */
   --ease-out: 280ms cubic-bezier(0.4, 0, 0.2, 1);
   --ease-in-out: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* ── Z-Index ── */
-  --z-base: 1;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-overlay: 300;
-  --z-modal: 400;
-
-  /* ── Layout ── */
-  --max-width: 1200px;
-  --nav-height: 72px;
+  --z-base: 1; --z-dropdown: 100; --z-sticky: 200;
+  --z-overlay: 300; --z-modal: 400;
+  --max-width: 1200px; --nav-height: 72px;
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-height);
-}
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
 
 body {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: 400;
-  line-height: 1.7;
-  color: var(--color-primary);
+  font-family: var(--font-body); font-size: var(--text-base);
+  font-weight: 400; line-height: 1.7; color: var(--color-primary);
   background: var(--color-bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
 
-/* ── Background texture ── */
 #bg-texture {
   position: fixed; inset: 0; pointer-events: none; z-index: 0;
   opacity: 0.035;
@@ -131,91 +82,68 @@ body {
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ── Focus ── */
-:focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 2px;
-}
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
 
-/* ── Skip link ── */
 .skip-link {
   position: absolute; top: -100px; left: 16px;
   background: var(--color-accent); color: var(--color-inverse);
   padding: 8px 16px; z-index: 999; border-radius: var(--radius-md);
-  font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+  font-family: var(--font-mono); font-size: var(--text-xs);
+  letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
 }
 .skip-link:focus { top: 16px; }
 
-/* ═══════════════════ NAV ═══════════════════ */
+/* NAV */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-sticky);
-  height: var(--nav-height);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 var(--space-8);
+  height: var(--nav-height); display: flex; align-items: center;
+  justify-content: space-between; padding: 0 var(--space-8);
   transition: background var(--ease-out), box-shadow var(--ease-out);
 }
-
 .nav.scrolled {
   background: rgba(12,13,17,0.88);
   backdrop-filter: blur(16px) saturate(130%);
   -webkit-backdrop-filter: blur(16px) saturate(130%);
   box-shadow: 0 1px 0 var(--color-border);
 }
-
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   font-family: var(--font-mono); font-size: var(--text-xl); font-weight: 700;
-  letter-spacing: 0.12em; color: var(--color-primary); text-decoration: none;
-  z-index: 1;
+  letter-spacing: 0.12em; color: var(--color-primary); text-decoration: none; z-index: 1;
 }
-
 .nav-logo .logo-mark {
-  width: 32px; height: 32px;
-  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
   border: 2px solid var(--color-accent); color: var(--color-accent);
   font-size: 0.55rem; letter-spacing: 0.08em; position: relative;
 }
-
 .nav-logo .logo-mark::after {
   content: ''; position: absolute; inset: -4px;
   border: 1px solid rgba(240,136,0,0.25);
 }
-
 .nav-right { display: flex; align-items: center; gap: var(--space-6); }
-
-.nav-links {
-  display: flex; list-style: none; gap: var(--space-6);
-}
-
+.nav-links { display: flex; list-style: none; gap: var(--space-6); }
 .nav-links a {
   font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.1em; color: var(--color-secondary);
   text-decoration: none; text-transform: uppercase;
-  transition: color var(--ease-out); position: relative;
-  padding: 4px 0;
+  transition: color var(--ease-out); position: relative; padding: 4px 0;
 }
-
 .nav-links a::after {
   content: ''; position: absolute; bottom: -2px; left: 0;
   width: 0; height: 1px; background: var(--color-accent);
   transition: width var(--ease-out);
 }
-
 .nav-links a:hover, .nav-links a.active { color: var(--color-accent-light); }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
-/* Language switcher */
 .lang-switcher {
   font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.06em; color: var(--color-secondary);
   background: transparent; border: 1px solid var(--color-border);
   padding: 6px 10px; cursor: pointer; outline: none;
-  border-radius: var(--radius-sm);
-  transition: border-color var(--ease-out), color var(--ease-out);
+  border-radius: var(--radius-sm); transition: border-color var(--ease-out), color var(--ease-out);
 }
-
 .lang-switcher:hover { border-color: var(--color-accent); color: var(--color-primary); }
-.lang-switcher:focus-visible { border-color: var(--color-accent); }
 
 .nav-cta {
   font-family: var(--font-mono); font-size: var(--text-xs);
@@ -224,98 +152,72 @@ body {
   padding: 8px 20px; text-decoration: none; text-transform: uppercase;
   transition: all var(--ease-out); white-space: nowrap;
 }
+.nav-cta:hover { background: var(--color-accent); color: var(--color-inverse); box-shadow: 0 0 20px rgba(240,136,0,0.25); }
 
-.nav-cta:hover {
-  background: var(--color-accent); color: var(--color-inverse);
-  box-shadow: 0 0 20px rgba(240,136,0,0.25);
-}
-
-/* Mobile toggle */
 .mobile-toggle {
   display: none; flex-direction: column; gap: 5px;
-  cursor: pointer; padding: 4px; z-index: var(--z-modal); background: none; border: none;
+  cursor: pointer; padding: 4px; z-index: var(--z-modal);
+  background: none; border: none;
 }
-
 .mobile-toggle span {
   display: block; width: 22px; height: 2px;
   background: var(--color-primary); transition: transform var(--ease-out), opacity var(--ease-out);
 }
-
 .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .mobile-toggle.active span:nth-child(2) { opacity: 0; }
 .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-/* ═══════════════════ SECTION LAYOUT ═══════════════════ */
+/* SECTIONS */
 .section {
   position: relative; z-index: var(--z-base);
-  padding: var(--space-11) var(--space-8);
-  max-width: var(--max-width); margin: 0 auto;
+  padding: var(--space-11) var(--space-8); max-width: var(--max-width); margin: 0 auto;
 }
-
 .section-label {
   font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.2em; color: var(--color-accent);
   text-transform: uppercase; margin-bottom: var(--space-4);
   display: flex; align-items: center; gap: var(--space-4);
 }
-
 .section-label::before {
   content: ''; width: 32px; height: 1px; background: var(--color-accent); opacity: 0.6;
 }
-
 .section-title {
   font-family: var(--font-heading); font-size: var(--text-4xl); font-weight: 700;
-  letter-spacing: -0.02em; line-height: 1.2;
-  margin-bottom: var(--space-4);
+  letter-spacing: -0.02em; line-height: 1.2; margin-bottom: var(--space-4);
 }
-
 .section-title .dim { color: var(--color-muted); font-weight: 400; }
+.section-desc { color: var(--color-secondary); max-width: 640px; margin-bottom: var(--space-8); line-height: 1.8; }
 
-.section-desc {
-  color: var(--color-secondary); max-width: 640px;
-  margin-bottom: var(--space-8); line-height: 1.8;
-}
-
-/* ═══════════════════ HERO ═══════════════════ */
+/* HERO */
 .hero {
   min-height: 100vh; display: flex; align-items: center;
-  padding: 0 var(--space-8); position: relative; z-index: var(--z-base);
-  overflow: hidden;
+  padding: 0 var(--space-8); position: relative; z-index: var(--z-base); overflow: hidden;
 }
-
 .hero-visual {
   position: absolute; right: -180px; top: 50%; transform: translateY(-50%);
   width: 700px; height: 700px; pointer-events: none;
 }
-
 .hero-rings { width: 100%; height: 100%; position: relative; }
-
 .hero-ring {
   position: absolute; border-radius: 50%;
   border: 1px solid rgba(240,136,0,0.1);
   top: 50%; left: 50%; transform: translate(-50%, -50%);
 }
-
 .hero-ring:nth-child(1) { width: 160px; height: 160px; }
 .hero-ring:nth-child(2) { width: 320px; height: 320px; }
 .hero-ring:nth-child(3) { width: 480px; height: 480px; }
 .hero-ring:nth-child(4) { width: 640px; height: 640px; }
 .hero-ring:nth-child(5) { width: 800px; height: 800px; }
-
 .hero-crosshair {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 60px; height: 60px;
 }
-
 .hero-crosshair::before, .hero-crosshair::after {
   content: ''; position: absolute; background: var(--color-accent); opacity: 0.35;
 }
-
 .hero-crosshair::before { width: 100%; height: 1px; top: 50%; }
 .hero-crosshair::after  { width: 1px; height: 100%; left: 50%; }
-
 .hero-content { position: relative; z-index: 1; max-width: 680px; }
-
 .hero-badge {
   display: inline-flex; align-items: center; gap: var(--space-2);
   font-family: var(--font-mono); font-size: var(--text-xs);
@@ -324,227 +226,103 @@ body {
   padding: 6px 14px; border: 1px solid rgba(240,136,0,0.2);
   background: rgba(240,136,0,0.05);
 }
-
 .hero-badge .dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--color-accent); animation: pulse 2s ease-in-out infinite;
 }
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; box-shadow: 0 0 6px var(--color-accent); }
-}
-
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1;box-shadow:0 0 6px var(--color-accent)} }
 .hero-title {
   font-family: var(--font-heading); font-size: clamp(var(--text-4xl), 5.5vw, 4rem);
   font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
   margin-bottom: var(--space-5);
 }
-
 .hero-title .hl { color: var(--color-accent); position: relative; }
-
 .hero-title .hl::after {
   content: ''; position: absolute; bottom: 4px; left: 0;
   width: 100%; height: 4px; background: var(--color-accent); opacity: 0.15;
 }
-
-.hero-desc {
-  font-size: var(--text-base); color: var(--color-secondary);
-  max-width: 520px; margin-bottom: var(--space-7); line-height: 1.8;
-}
-
+.hero-desc { font-size: var(--text-base); color: var(--color-secondary); max-width: 520px; margin-bottom: var(--space-7); line-height: 1.8; }
 .hero-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
 
 .btn {
   display: inline-flex; align-items: center; gap: var(--space-2);
   font-family: var(--font-mono); font-size: var(--text-xs);
   letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-  padding: 14px 32px; border: none; cursor: pointer;
-  transition: all var(--ease-out);
+  padding: 14px 32px; border: none; cursor: pointer; transition: all var(--ease-out);
 }
+.btn-primary { background: var(--color-accent); color: var(--color-inverse); }
+.btn-primary:hover { background: var(--color-accent-light); box-shadow: 0 0 36px rgba(240,136,0,0.3); transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--color-primary); border: 1px solid var(--color-border); }
+.btn-outline:hover { border-color: var(--color-secondary); background: rgba(255,255,255,0.03); }
 
-.btn-primary {
-  background: var(--color-accent); color: var(--color-inverse);
-}
-
-.btn-primary:hover {
-  background: var(--color-accent-light);
-  box-shadow: 0 0 36px rgba(240,136,0,0.3);
-  transform: translateY(-1px);
-}
-
-.btn-outline {
-  background: transparent; color: var(--color-primary);
-  border: 1px solid var(--color-border);
-}
-
-.btn-outline:hover {
-  border-color: var(--color-secondary);
-  background: rgba(255,255,255,0.03);
-}
-
-.hero-stats {
-  display: flex; gap: var(--space-8); margin-top: var(--space-10);
-  flex-wrap: wrap;
-}
-
+.hero-stats { display: flex; gap: var(--space-8); margin-top: var(--space-10); flex-wrap: wrap; }
 .hero-stat { min-width: 120px; }
+.hero-stat-value { font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700; color: var(--color-accent-light); line-height: 1; letter-spacing: -0.02em; }
+.hero-stat-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; color: var(--color-muted); text-transform: uppercase; margin-top: 6px; }
 
-.hero-stat-value {
-  font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700;
-  color: var(--color-accent-light); line-height: 1; letter-spacing: -0.02em;
-}
-
-.hero-stat-label {
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
-  color: var(--color-muted); text-transform: uppercase; margin-top: 6px;
-}
-
-/* ═══════════════════ SERVICES GRID ═══════════════════ */
+/* SERVICES */
 .services-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--color-border);
-  border: 1px solid var(--color-border);
+  gap: 1px; background: var(--color-border); border: 1px solid var(--color-border);
 }
-
 .service-card {
   background: var(--color-surface); padding: var(--space-8) var(--space-6);
   transition: background var(--ease-out); position: relative; overflow: hidden;
 }
-
 .service-card:hover { background: var(--color-surface-hover); }
-
 .service-card::before {
   content: ''; position: absolute; top: 0; left: 0;
   width: 100%; height: 2px; background: var(--color-accent);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform var(--ease-out);
+  transform: scaleX(0); transform-origin: left; transition: transform var(--ease-out);
 }
-
 .service-card:hover::before { transform: scaleX(1); }
+.service-icon { width: 44px; height: 44px; margin-bottom: var(--space-5); }
+.service-card h3 { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700; letter-spacing: -0.01em; margin-bottom: var(--space-3); }
+.service-card p { font-size: var(--text-sm); color: var(--color-secondary); line-height: 1.7; }
+.service-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.service-tag { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; color: var(--color-secondary); padding: 4px 10px; border: 1px solid rgba(138,146,155,0.2); }
 
-.service-icon {
-  width: 44px; height: 44px; margin-bottom: var(--space-5);
-}
-
-.service-card h3 {
-  font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700;
-  letter-spacing: -0.01em; margin-bottom: var(--space-3);
-}
-
-.service-card p {
-  font-size: var(--text-sm); color: var(--color-secondary); line-height: 1.7;
-}
-
-.service-tags {
-  display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4);
-}
-
-.service-tag {
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em;
-  color: var(--color-secondary); padding: 4px 10px;
-  border: 1px solid rgba(138,146,155,0.2);
-}
-
-/* ═══════════════════ EQUIPMENT ═══════════════════ */
-.equipment-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6);
-}
-
+/* EQUIPMENT */
+.equipment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
 .equipment-card {
   background: var(--color-surface); border: 1px solid var(--color-border);
   padding: var(--space-7); display: flex; gap: var(--space-5);
   transition: border-color var(--ease-out), background var(--ease-out);
 }
-
-.equipment-card:hover {
-  border-color: rgba(240,136,0,0.25);
-  background: var(--color-surface-hover);
-}
-
-.equipment-num {
-  font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700;
-  color: var(--color-accent); opacity: 0.3; line-height: 1; flex-shrink: 0;
-}
-
-.equipment-card h3 {
-  font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700;
-  margin-bottom: var(--space-2);
-}
-
+.equipment-card:hover { border-color: rgba(240,136,0,0.25); background: var(--color-surface-hover); }
+.equipment-num { font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700; color: var(--color-accent); opacity: 0.3; line-height: 1; flex-shrink: 0; }
+.equipment-card h3 { font-family: var(--font-heading); font-size: var(--text-lg); font-weight: 700; margin-bottom: var(--space-2); }
 .equipment-card p { font-size: var(--text-sm); color: var(--color-secondary); }
 
-/* ═══════════════════ STATS BAR ═══════════════════ */
-.stats-bar {
-  background: var(--color-surface); border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.stats-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  max-width: var(--max-width); margin: 0 auto;
-}
-
-.stat-item {
-  text-align: center; padding: var(--space-8) var(--space-5);
-  border-right: 1px solid var(--color-border);
-}
-
+/* STATS */
+.stats-bar { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); max-width: var(--max-width); margin: 0 auto; }
+.stat-item { text-align: center; padding: var(--space-8) var(--space-5); border-right: 1px solid var(--color-border); }
 .stat-item:last-child { border-right: none; }
-
-.stat-value {
-  font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700;
-  color: var(--color-accent-light); line-height: 1; margin-bottom: var(--space-2);
-}
-
+.stat-value { font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700; color: var(--color-accent-light); line-height: 1; margin-bottom: var(--space-2); }
 .stat-value .unit { font-size: var(--text-base); color: var(--color-accent); }
+.stat-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; color: var(--color-muted); text-transform: uppercase; }
 
-.stat-label {
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em;
-  color: var(--color-muted); text-transform: uppercase;
-}
-
-/* ═══════════════════ PROCESS ═══════════════════ */
+/* PROCESS */
 .process-steps {
   display: grid; grid-template-columns: repeat(6, 1fr);
-  gap: 1px; background: var(--color-border);
-  border: 1px solid var(--color-border);
-  counter-reset: step;
+  gap: 1px; background: var(--color-border); border: 1px solid var(--color-border); counter-reset: step;
 }
-
-.process-step {
-  background: var(--color-surface); padding: var(--space-7) var(--space-5);
-  text-align: center; counter-increment: step; position: relative;
-}
-
+.process-step { background: var(--color-surface); padding: var(--space-7) var(--space-5); text-align: center; counter-increment: step; position: relative; }
 .process-step::before {
-  content: '0' counter(step);
-  font-family: var(--font-mono); font-size: var(--text-3xl); font-weight: 700;
-  color: var(--color-accent); opacity: 0.2; display: block; margin-bottom: var(--space-4);
+  content: '0' counter(step); font-family: var(--font-mono); font-size: var(--text-3xl);
+  font-weight: 700; color: var(--color-accent); opacity: 0.2; display: block; margin-bottom: var(--space-4);
 }
-
-.process-step h3 {
-  font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700;
-  margin-bottom: var(--space-2);
-}
-
+.process-step h3 { font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700; margin-bottom: var(--space-2); }
 .process-step p { font-size: var(--text-sm); color: var(--color-secondary); }
 
-/* ═══════════════════ PORTFOLIO ═══════════════════ */
-.portfolio-grid {
-  display: grid; grid-template-columns: repeat(12, 1fr);
-  gap: var(--space-5); grid-auto-flow: dense;
-}
-
+/* PORTFOLIO */
+.portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-5); grid-auto-flow: dense; }
 .portfolio-item {
-  position: relative; background: var(--color-surface);
-  border: 1px solid var(--color-border); overflow: hidden;
-  cursor: pointer; aspect-ratio: 4/3;
-  transition: border-color var(--ease-out);
+  position: relative; background: var(--color-surface); border: 1px solid var(--color-border);
+  overflow: hidden; cursor: pointer; aspect-ratio: 4/3; transition: border-color var(--ease-out);
 }
-
 .portfolio-item:hover { border-color: rgba(240,136,0,0.25); }
-
 .portfolio-item:nth-child(1) { grid-column: span 5; }
 .portfolio-item:nth-child(2) { grid-column: span 7; }
 .portfolio-item:nth-child(3) { grid-column: span 7; }
@@ -552,116 +330,53 @@ body {
 .portfolio-item:nth-child(5) { grid-column: span 4; }
 .portfolio-item:nth-child(6) { grid-column: span 4; }
 .portfolio-item:nth-child(7) { grid-column: span 4; }
-
 .portfolio-visual {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, rgba(240,136,0,0.06) 0%, transparent 60%);
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .portfolio-item:hover .portfolio-visual { transform: scale(1.04); }
-
 .portfolio-shape {
   width: 55%; height: 55%; border: 2px solid rgba(240,136,0,0.12);
   border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center;
 }
-
-.portfolio-shape::after {
-  content: ''; width: 28%; height: 28%; border-radius: 50%;
-  background: rgba(240,136,0,0.08); position: absolute;
-}
-
+.portfolio-shape::after { content: ''; width: 28%; height: 28%; border-radius: 50%; background: rgba(240,136,0,0.08); position: absolute; }
 .portfolio-shape.rect { border-radius: var(--radius-lg); }
 .portfolio-shape.rect::after { border-radius: var(--radius-md); }
-
 .portfolio-info {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(12,13,17,0.92) 0%, transparent 55%);
+  position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,13,17,0.92) 0%, transparent 55%);
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: var(--space-5); opacity: 0; transition: opacity var(--ease-out);
 }
-
 .portfolio-item:hover .portfolio-info { opacity: 1; }
+.portfolio-info h3 { font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700; margin-bottom: 2px; }
+.portfolio-info .mat { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--color-accent-light); text-transform: uppercase; }
 
-.portfolio-info h3 {
-  font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700;
-  margin-bottom: 2px;
-}
-
-.portfolio-info .mat {
-  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em;
-  color: var(--color-accent-light); text-transform: uppercase;
-}
-
-/* ═══════════════════ CERTS ═══════════════════ */
-.certs-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr);
-  gap: 1px; background: var(--color-border);
-  border: 1px solid var(--color-border);
-}
-
-.cert-card {
-  background: var(--color-surface); padding: var(--space-7) var(--space-5);
-  text-align: center; transition: background var(--ease-out);
-}
-
+/* CERTS */
+.certs-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--color-border); border: 1px solid var(--color-border); }
+.cert-card { background: var(--color-surface); padding: var(--space-7) var(--space-5); text-align: center; transition: background var(--ease-out); }
 .cert-card:hover { background: var(--color-surface-hover); }
-
-.cert-icon {
-  width: 52px; height: 52px; margin: 0 auto var(--space-4);
-  border: 2px solid var(--color-accent); display: flex;
-  align-items: center; justify-content: center;
-  opacity: 0.4; transition: opacity var(--ease-out);
-}
-
+.cert-icon { width: 52px; height: 52px; margin: 0 auto var(--space-4); border: 2px solid var(--color-accent); display: flex; align-items: center; justify-content: center; opacity: 0.4; transition: opacity var(--ease-out); }
 .cert-card:hover .cert-icon { opacity: 0.8; }
-
 .cert-icon svg { width: 28px; height: 28px; }
-
-.cert-card h3 {
-  font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700;
-  margin-bottom: var(--space-1);
-}
-
+.cert-card h3 { font-family: var(--font-heading); font-size: var(--text-base); font-weight: 700; margin-bottom: var(--space-1); }
 .cert-card p { font-size: var(--text-sm); color: var(--color-secondary); }
 
-/* ═══════════════════ CTA ═══════════════════ */
+/* CTA */
 .cta-section {
   background: var(--color-surface); border: 1px solid var(--color-border);
   max-width: var(--max-width); margin: 0 auto;
-  padding: var(--space-8) var(--space-8);
-  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8);
-  align-items: center;
+  padding: var(--space-8); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center;
 }
-
-.cta-text h2 {
-  font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: 700;
-  margin-bottom: var(--space-4);
-}
-
+.cta-text h2 { font-family: var(--font-heading); font-size: var(--text-2xl); font-weight: 700; margin-bottom: var(--space-4); }
 .cta-text p { color: var(--color-secondary); margin-bottom: var(--space-5); line-height: 1.8; }
-
 .cta-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
-
-.cta-info {
-  display: flex; flex-direction: column; gap: var(--space-4);
-  padding: var(--space-6); background: var(--color-bg); border: 1px solid var(--color-border);
-}
-
-.cta-info-item {
-  display: flex; align-items: center; gap: var(--space-3);
-  font-size: var(--text-sm); color: var(--color-secondary);
-}
-
-.cta-info-item .ico {
-  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--color-border); flex-shrink: 0;
-}
-
+.cta-info { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-6); background: var(--color-bg); border: 1px solid var(--color-border); }
+.cta-info-item { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); color: var(--color-secondary); }
+.cta-info-item .ico { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); flex-shrink: 0; }
 .cta-info-item .ico svg { width: 16px; height: 16px; stroke: var(--color-accent); }
 
-/* ═══════════════════ FLOATING CONTACT ═══════════════════ */
+/* FLOATING */
 .float-btn {
   position: fixed; bottom: 32px; right: 32px; z-index: var(--z-dropdown);
   width: 52px; height: 52px; border-radius: 50%;
@@ -669,116 +384,54 @@ body {
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 20px rgba(240,136,0,0.35);
   transition: transform var(--ease-out), box-shadow var(--ease-out);
+  animation: floatPulse 2.5s ease-in-out infinite;
 }
-
 .float-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(240,136,0,0.5); }
-
 .float-btn svg { width: 22px; height: 22px; fill: var(--color-inverse); }
+@keyframes floatPulse { 0%,100%{box-shadow:0 4px 20px rgba(240,136,0,0.35)} 50%{box-shadow:0 4px 32px rgba(240,136,0,0.55)} }
 
-@keyframes floatPulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(240,136,0,0.35); }
-  50% { box-shadow: 0 4px 32px rgba(240,136,0,0.55); }
-}
-
-.float-btn { animation: floatPulse 2.5s ease-in-out infinite; }
-
-/* QR Popup */
 .qr-popup {
   position: fixed; bottom: 100px; right: 32px; z-index: var(--z-overlay);
   background: var(--color-elevated); border: 1px solid var(--color-border);
-  padding: var(--space-5); text-align: center; display: none;
-  box-shadow: var(--shadow-lg);
+  padding: var(--space-5); text-align: center; display: none; box-shadow: var(--shadow-lg);
 }
-
 .qr-popup.visible { display: block; }
-
 .qr-popup img { width: 200px; height: 200px; display: block; }
+.qr-popup p { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-secondary); letter-spacing: 0.08em; margin-top: var(--space-3); }
 
-.qr-popup p {
-  font-family: var(--font-mono); font-size: var(--text-xs);
-  color: var(--color-secondary); letter-spacing: 0.08em; margin-top: var(--space-3);
-}
-
-/* ═══════════════════ FOOTER ═══════════════════ */
-.footer {
-  border-top: 1px solid var(--color-border);
-  padding: var(--space-9) var(--space-8) var(--space-8);
-  position: relative; z-index: var(--z-base);
-}
-
-.footer-grid {
-  max-width: var(--max-width); margin: 0 auto;
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-8);
-}
-
-.footer-brand .brand-name {
-  font-family: var(--font-mono); font-size: var(--text-lg); font-weight: 700;
-  letter-spacing: 0.1em; margin-bottom: var(--space-3);
-}
-
+/* FOOTER */
+.footer { border-top: 1px solid var(--color-border); padding: var(--space-9) var(--space-8) var(--space-8); position: relative; z-index: var(--z-base); }
+.footer-grid { max-width: var(--max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-8); }
+.footer-brand .brand-name { font-family: var(--font-mono); font-size: var(--text-lg); font-weight: 700; letter-spacing: 0.1em; margin-bottom: var(--space-3); }
 .footer-brand p { font-size: var(--text-sm); color: var(--color-muted); line-height: 1.8; }
-
-.footer-col h4 {
-  font-family: var(--font-mono); font-size: var(--text-xs);
-  letter-spacing: 0.15em; color: var(--color-accent);
-  text-transform: uppercase; margin-bottom: var(--space-4);
-}
-
+.footer-col h4 { font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: 0.15em; color: var(--color-accent); text-transform: uppercase; margin-bottom: var(--space-4); }
 .footer-col ul { list-style: none; }
-
 .footer-col li { margin-bottom: var(--space-2); }
-
-.footer-col a {
-  font-size: var(--text-sm); color: var(--color-secondary); text-decoration: none;
-  transition: color var(--ease-out);
-}
-
+.footer-col a { font-size: var(--text-sm); color: var(--color-secondary); text-decoration: none; transition: color var(--ease-out); }
 .footer-col a:hover { color: var(--color-primary); }
+.footer-bottom { max-width: var(--max-width); margin: var(--space-8) auto 0; padding-top: var(--space-5); border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-4); font-size: var(--text-xs); color: var(--color-muted); }
 
-.footer-bottom {
-  max-width: var(--max-width); margin: var(--space-8) auto 0;
-  padding-top: var(--space-5); border-top: 1px solid var(--color-border);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: var(--space-4);
-  font-size: var(--text-xs); color: var(--color-muted);
-}
-
-/* ═══════════════════ ANIMATIONS ═══════════════════ */
-.reveal {
-  opacity: 0; transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
-
-.reveal-stagger > * {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
 .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.visible > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
 .reveal-stagger.visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: translateY(0); }
 
-/* ═══════════════════ REDUCED MOTION ═══════════════════ */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
   .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
 }
 
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  :root {
-    --text-4xl: 2.2rem; --text-5xl: 2.8rem;
-  }
-
+  :root { --text-4xl: 2.2rem; --text-5xl: 2.8rem; }
   .hero-visual { display: none; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { grid-template-columns: repeat(3, 1fr); }
@@ -786,7 +439,6 @@ body {
   .equipment-grid { grid-template-columns: 1fr; }
   .cta-section { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-
   .portfolio-item:nth-child(1) { grid-column: span 6; }
   .portfolio-item:nth-child(2) { grid-column: span 6; }
   .portfolio-item:nth-child(3) { grid-column: span 6; }
@@ -797,62 +449,33 @@ body {
 }
 
 @media (max-width: 768px) {
-  :root {
-    --nav-height: 64px;
-    --text-3xl: 1.7rem; --text-4xl: 1.9rem;
-  }
-
+  :root { --nav-height: 64px; --text-3xl: 1.7rem; --text-4xl: 1.9rem; }
   .section { padding: var(--space-10) var(--space-5); }
   .hero { padding: 0 var(--space-5); }
   .nav { padding: 0 var(--space-5); }
-
   .nav-links, .nav-cta, .nav .lang-switcher { display: none; }
-
   .mobile-toggle { display: flex; }
-
   .nav-mobile {
     position: fixed; inset: 0; z-index: var(--z-overlay);
     background: rgba(12,13,17,0.97); backdrop-filter: blur(20px);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: var(--space-6); opacity: 0; pointer-events: none;
-    transition: opacity var(--ease-out);
+    gap: var(--space-6); opacity: 0; pointer-events: none; transition: opacity var(--ease-out);
   }
-
   .nav-mobile.open { opacity: 1; pointer-events: auto; }
-
-  .nav-mobile a {
-    font-family: var(--font-mono); font-size: var(--text-lg);
-    letter-spacing: 0.12em; color: var(--color-primary);
-    text-decoration: none; text-transform: uppercase;
-  }
-
-  .nav-mobile .nav-cta-mobile {
-    font-family: var(--font-mono); font-size: var(--text-sm);
-    letter-spacing: 0.1em; color: var(--color-accent);
-    border: 1px solid var(--color-accent); background: transparent;
-    padding: 12px 28px; text-decoration: none; text-transform: uppercase;
-    margin-top: var(--space-4);
-  }
-
-  .nav-mobile .lang-switcher {
-    margin-top: var(--space-4); font-size: var(--text-base); padding: 8px 16px;
-  }
-
+  .nav-mobile a { font-family: var(--font-mono); font-size: var(--text-lg); letter-spacing: 0.12em; color: var(--color-primary); text-decoration: none; text-transform: uppercase; }
+  .nav-mobile .nav-cta-mobile { font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: 0.1em; color: var(--color-accent); border: 1px solid var(--color-accent); background: transparent; padding: 12px 28px; text-decoration: none; text-transform: uppercase; margin-top: var(--space-4); }
+  .nav-mobile .lang-switcher { margin-top: var(--space-4); font-size: var(--text-base); padding: 8px 16px; }
   .hero-stats { gap: var(--space-5); margin-top: var(--space-8); }
   .hero-stat-value { font-size: var(--text-2xl); }
-
   .services-grid { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: repeat(2, 1fr); }
   .certs-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(2) { border-right: none; }
-
   .portfolio-grid { grid-template-columns: 1fr; }
   .portfolio-item:nth-child(n) { grid-column: span 1; }
-
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
-
   .float-btn { bottom: 20px; right: 20px; width: 46px; height: 46px; }
   .qr-popup { right: 8px; bottom: 80px; }
 }
@@ -874,22 +497,22 @@ body {
 <div id="bg-texture" aria-hidden="true"></div>
 <div id="bg-noise" aria-hidden="true"></div>
 
-<a href="#main-content" class="skip-link" data-i18n>Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
-<!-- ═══════════════════ NAV ═══════════════════ -->
-<nav class="nav" id="nav" data-i18n-attr="aria-label:nav.arialabel">
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav" id="nav" data-i18n-attr="aria-label:nav.arialabel" aria-label="主导航">
   <a href="#" class="nav-logo" data-i18n-attr="aria-label:nav.logoAria" aria-label="CNC STUDIO - 返回首页">
     <span class="logo-mark">CNC</span>
-    <span data-i18n>common.brandShort</span>
+    <span data-i18n="common.brandShort">CNC</span>
   </a>
 
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
-      <li><a href="#services" data-i18n>nav.services</a></li>
-      <li><a href="#equipment" data-i18n>nav.equipment</a></li>
-      <li><a href="#process" data-i18n>nav.process</a></li>
-      <li><a href="#portfolio" data-i18n>nav.portfolio</a></li>
-      <li><a href="#certs" data-i18n>nav.certs</a></li>
+      <li><a href="#services" data-i18n="nav.services">加工服务</a></li>
+      <li><a href="#equipment" data-i18n="nav.equipment">设备能力</a></li>
+      <li><a href="#process" data-i18n="nav.process">工艺流程</a></li>
+      <li><a href="#portfolio" data-i18n="nav.portfolio">加工案例</a></li>
+      <li><a href="#certs" data-i18n="nav.certs">资质认证</a></li>
     </ul>
 
     <select class="lang-switcher" id="langSwitcher" data-i18n-attr="aria-label:nav.langLabel" aria-label="语言">
@@ -900,21 +523,20 @@ body {
       <option value="ar">AR</option>
     </select>
 
-    <a href="#cta" class="nav-cta" data-i18n>nav.cta</a>
+    <a href="#cta" class="nav-cta" data-i18n="nav.cta">获取报价</a>
   </div>
 
   <button class="mobile-toggle" id="mobileToggle" data-i18n-attr="aria-label:nav.menuOpen" aria-label="打开菜单">
     <span></span><span></span><span></span>
   </button>
 
-  <!-- Mobile menu overlay -->
   <div class="nav-mobile" id="navMobile">
-    <a href="#services" data-i18n>nav.services</a>
-    <a href="#equipment" data-i18n>nav.equipment</a>
-    <a href="#process" data-i18n>nav.process</a>
-    <a href="#portfolio" data-i18n>nav.portfolio</a>
-    <a href="#certs" data-i18n>nav.certs</a>
-    <a href="#cta" class="nav-cta-mobile" data-i18n>nav.cta</a>
+    <a href="#services" data-i18n="nav.services">加工服务</a>
+    <a href="#equipment" data-i18n="nav.equipment">设备能力</a>
+    <a href="#process" data-i18n="nav.process">工艺流程</a>
+    <a href="#portfolio" data-i18n="nav.portfolio">加工案例</a>
+    <a href="#certs" data-i18n="nav.certs">资质认证</a>
+    <a href="#cta" class="nav-cta-mobile" data-i18n="nav.cta">获取报价</a>
     <select class="lang-switcher" id="langSwitcherMobile" data-i18n-attr="aria-label:nav.langLabel" aria-label="语言">
       <option value="zh-CN">简中</option>
       <option value="zh-TW">繁中</option>
@@ -927,15 +549,12 @@ body {
 
 <main id="main-content">
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
+<!-- ═══════ HERO ═══════ -->
 <section class="hero">
   <div class="hero-visual" aria-hidden="true">
     <div class="hero-rings">
-      <div class="hero-ring"></div>
-      <div class="hero-ring"></div>
-      <div class="hero-ring"></div>
-      <div class="hero-ring"></div>
-      <div class="hero-ring"></div>
+      <div class="hero-ring"></div><div class="hero-ring"></div><div class="hero-ring"></div>
+      <div class="hero-ring"></div><div class="hero-ring"></div>
     </div>
     <div class="hero-crosshair"></div>
   </div>
@@ -943,358 +562,285 @@ body {
   <div class="hero-content">
     <div class="hero-badge reveal">
       <span class="dot" aria-hidden="true"></span>
-      <span data-i18n>hero.badge</span>
+      <span data-i18n="hero.badge">±0.005mm 精度 · 15年行业深耕</span>
     </div>
     <h1 class="hero-title reveal">
-      <span data-i18n>hero.title1</span><br>
-      <span data-i18n class="hl">hero.title2</span>
+      <span data-i18n="hero.title1">将金属</span><br>
+      <span data-i18n="hero.title2" class="hl">变成精度</span>
     </h1>
-    <p class="hero-desc reveal" data-i18n>hero.desc</p>
+    <p class="hero-desc reveal" data-i18n="hero.desc">CNC Studio 成立于2011年，是一家专注于高精度数控加工的技术型工作室。我们以 ±0.005mm 的公差标准，为航空航天、医疗器械、精密仪器、半导体等领域提供可靠的零部件制造服务。从单件打样到批量生产，始终用数据说话。</p>
     <div class="hero-actions reveal">
-      <a href="#services" class="btn btn-primary" data-i18n>hero.btnServices</a>
-      <a href="#cta" class="btn btn-outline" data-i18n>hero.btnContact</a>
+      <a href="#services" class="btn btn-primary" data-i18n="hero.btnServices">了解服务</a>
+      <a href="#cta" class="btn btn-outline" data-i18n="hero.btnContact">联系我们</a>
     </div>
     <div class="hero-stats reveal">
       <div class="hero-stat">
         <div class="hero-stat-value">±0.005<span style="font-size:0.55em;color:var(--color-accent);margin-left:2px;">mm</span></div>
-        <div class="hero-stat-label" data-i18n>hero.statPrecision</div>
+        <div class="hero-stat-label" data-i18n="hero.statPrecision">最高加工精度</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value">15<span style="font-size:0.55em;color:var(--color-accent);margin-left:2px;">+</span></div>
-        <div class="hero-stat-label" data-i18n>hero.statExperience</div>
+        <div class="hero-stat-label" data-i18n="hero.statExperience">行业深耕经验</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value">2000<span style="font-size:0.55em;color:var(--color-accent);margin-left:2px;">+</span></div>
-        <div class="hero-stat-label" data-i18n>hero.statProjects</div>
+        <div class="hero-stat-label" data-i18n="hero.statProjects">完成项目数</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ SERVICES ═══════════════════ -->
+<!-- ═══════ SERVICES ═══════ -->
 <section class="section" id="services">
-  <div class="section-label reveal" data-i18n>services.label</div>
-  <h2 class="section-title reveal"><span class="dim">01 /</span> <span data-i18n>services.title</span></h2>
-  <p class="section-desc reveal" data-i18n>services.desc</p>
+  <div class="section-label reveal" data-i18n="services.label">加工服务</div>
+  <h2 class="section-title reveal"><span class="dim">01 /</span> <span data-i18n="services.title">一站式精密制造</span></h2>
+  <p class="section-desc reveal" data-i18n="services.desc">涵盖铣削、车削、电加工、表面处理及质量检测的全工艺链服务，满足从单件打样到批量生产的各类需求。</p>
 
   <div class="services-grid reveal-stagger">
     <div class="service-card">
-      <div class="service-icon">
-        <svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="19" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.25"/><circle cx="22" cy="22" r="12" stroke="var(--color-accent)" stroke-width="1.2" opacity="0.5"/><circle cx="22" cy="22" r="4" fill="var(--color-accent)" opacity="0.35"/></svg>
-      </div>
-      <h3 data-i18n>services.s1.name</h3>
-      <p data-i18n>services.s1.desc</p>
+      <div class="service-icon"><svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="19" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.25"/><circle cx="22" cy="22" r="12" stroke="var(--color-accent)" stroke-width="1.2" opacity="0.5"/><circle cx="22" cy="22" r="4" fill="var(--color-accent)" opacity="0.35"/></svg></div>
+      <h3 data-i18n="services.s1.name">CNC 铣削</h3>
+      <p data-i18n="services.s1.desc">三轴、四轴、五轴联动铣削加工，覆盖铝合金、钛合金、不锈钢、工程塑料等各类材料，满足复杂曲面与高精度结构件加工需求。</p>
       <div class="service-tags">
-        <span class="service-tag" data-i18n>services.s1.spec1</span>
-        <span class="service-tag" data-i18n>services.s1.spec2</span>
+        <span class="service-tag" data-i18n="services.s1.spec1">±0.005mm 精度</span>
+        <span class="service-tag" data-i18n="services.s1.spec2">五轴联动</span>
       </div>
     </div>
 
     <div class="service-card">
-      <div class="service-icon">
-        <svg viewBox="0 0 44 44" fill="none"><rect x="9" y="14" width="26" height="16" rx="2" stroke="var(--color-accent)" stroke-width="1.5"/><line x1="22" y1="8" x2="22" y2="14" stroke="var(--color-accent)" stroke-width="1.2"/><circle cx="22" cy="22" r="3.5" stroke="var(--color-accent)" stroke-width="1" opacity="0.5"/></svg>
-      </div>
-      <h3 data-i18n>services.s2.name</h3>
-      <p data-i18n>services.s2.desc</p>
+      <div class="service-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="9" y="14" width="26" height="16" rx="2" stroke="var(--color-accent)" stroke-width="1.5"/><line x1="22" y1="8" x2="22" y2="14" stroke="var(--color-accent)" stroke-width="1.2"/><circle cx="22" cy="22" r="3.5" stroke="var(--color-accent)" stroke-width="1" opacity="0.5"/></svg></div>
+      <h3 data-i18n="services.s2.name">CNC 车削</h3>
+      <p data-i18n="services.s2.desc">精密数控车床加工，支持车铣复合。适合轴类、盘类、套类零件的高效批量生产，尺寸一致性佳。</p>
       <div class="service-tags">
-        <span class="service-tag" data-i18n>services.s2.spec1</span>
-        <span class="service-tag" data-i18n>services.s2.spec2</span>
+        <span class="service-tag" data-i18n="services.s2.spec1">±0.003mm 精度</span>
+        <span class="service-tag" data-i18n="services.s2.spec2">车铣复合</span>
       </div>
     </div>
 
     <div class="service-card">
-      <div class="service-icon">
-        <svg viewBox="0 0 44 44" fill="none"><path d="M12 35 L22 10 L32 35" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/><circle cx="22" cy="27" r="3" fill="var(--color-accent)" opacity="0.3"/><line x1="22" y1="19" x2="22" y2="24" stroke="var(--color-accent)" stroke-width="1.2"/></svg>
-      </div>
-      <h3 data-i18n>services.s3.name</h3>
-      <p data-i18n>services.s3.desc</p>
+      <div class="service-icon"><svg viewBox="0 0 44 44" fill="none"><path d="M12 35 L22 10 L32 35" stroke="var(--color-accent)" stroke-width="1.5" fill="none"/><circle cx="22" cy="27" r="3" fill="var(--color-accent)" opacity="0.3"/><line x1="22" y1="19" x2="22" y2="24" stroke="var(--color-accent)" stroke-width="1.2"/></svg></div>
+      <h3 data-i18n="services.s3.name">线切割 / EDM</h3>
+      <p data-i18n="services.s3.desc">慢走丝线切割与电火花加工，解决超硬材料和复杂内腔结构的高精度加工难题，精度可达微米级。</p>
       <div class="service-tags">
-        <span class="service-tag" data-i18n>services.s3.spec1</span>
-        <span class="service-tag" data-i18n>services.s3.spec2</span>
+        <span class="service-tag" data-i18n="services.s3.spec1">±0.002mm 精度</span>
+        <span class="service-tag" data-i18n="services.s3.spec2">慢走丝工艺</span>
       </div>
     </div>
 
     <div class="service-card">
-      <div class="service-icon">
-        <svg viewBox="0 0 44 44" fill="none"><rect x="8" y="8" width="28" height="28" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.3"/><rect x="15" y="12" width="14" height="20" stroke="var(--color-accent)" stroke-width="1.2"/><line x1="19" y1="16" x2="25" y2="16" stroke="var(--color-accent)" stroke-width="1" opacity="0.5"/></svg>
-      </div>
-      <h3 data-i18n>services.s4.name</h3>
-      <p data-i18n>services.s4.desc</p>
+      <div class="service-icon"><svg viewBox="0 0 44 44" fill="none"><rect x="8" y="8" width="28" height="28" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.3"/><rect x="15" y="12" width="14" height="20" stroke="var(--color-accent)" stroke-width="1.2"/><line x1="19" y1="16" x2="25" y2="16" stroke="var(--color-accent)" stroke-width="1" opacity="0.5"/></svg></div>
+      <h3 data-i18n="services.s4.name">表面处理</h3>
+      <p data-i18n="services.s4.desc">阳极氧化、电镀、喷砂、钝化、发黑等全系列表面处理工艺，让零件由内而外达到交付标准。</p>
       <div class="service-tags">
-        <span class="service-tag" data-i18n>services.s4.spec1</span>
-        <span class="service-tag" data-i18n>services.s4.spec2</span>
+        <span class="service-tag" data-i18n="services.s4.spec1">阳极氧化</span>
+        <span class="service-tag" data-i18n="services.s4.spec2">硬质氧化</span>
       </div>
     </div>
 
     <div class="service-card">
-      <div class="service-icon">
-        <svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="18" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.2"/><path d="M14 22 L20 28 L30 16" stroke="var(--color-accent)" stroke-width="1.8"/></svg>
-      </div>
-      <h3 data-i18n>services.s5.name</h3>
-      <p data-i18n>services.s5.desc</p>
+      <div class="service-icon"><svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="18" stroke="var(--color-accent)" stroke-width="1.5" opacity="0.2"/><path d="M14 22 L20 28 L30 16" stroke="var(--color-accent)" stroke-width="1.8"/></svg></div>
+      <h3 data-i18n="services.s5.name">质量检测</h3>
+      <p data-i18n="services.s5.desc">三坐标测量、影像测量、粗糙度仪——每件产品附带全尺寸检验报告，数据透明可追溯。</p>
       <div class="service-tags">
-        <span class="service-tag" data-i18n>services.s5.spec1</span>
-        <span class="service-tag" data-i18n>services.s5.spec2</span>
+        <span class="service-tag" data-i18n="services.s5.spec1">CMM 三坐标</span>
+        <span class="service-tag" data-i18n="services.s5.spec2">FAI 全尺寸报告</span>
       </div>
     </div>
 
     <div class="service-card">
-      <div class="service-icon">
-        <svg viewBox="0 0 44 44" fill="none"><path d="M10 26 L22 8 L34 26 L28 36 L16 36 Z" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="22" cy="22" r="7" stroke="var(--color-accent)" stroke-width="1" opacity="0.35"/></svg>
-      </div>
-      <h3 data-i18n>services.s6.name</h3>
-      <p data-i18n>services.s6.desc</p>
+      <div class="service-icon"><svg viewBox="0 0 44 44" fill="none"><path d="M10 26 L22 8 L34 26 L28 36 L16 36 Z" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="22" cy="22" r="7" stroke="var(--color-accent)" stroke-width="1" opacity="0.35"/></svg></div>
+      <h3 data-i18n="services.s6.name">工程咨询</h3>
+      <p data-i18n="services.s6.desc">DFM 可制造性分析、工艺路线优化、材料选型建议——我们不只加工，更帮助你把设计做对。</p>
       <div class="service-tags">
-        <span class="service-tag" data-i18n>services.s6.spec1</span>
-        <span class="service-tag" data-i18n>services.s6.spec2</span>
+        <span class="service-tag" data-i18n="services.s6.spec1">DFM 分析</span>
+        <span class="service-tag" data-i18n="services.s6.spec2">逆向工程</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ EQUIPMENT ═══════════════════ -->
+<!-- ═══════ EQUIPMENT ═══════ -->
 <section class="section" id="equipment">
-  <div class="section-label reveal" data-i18n>equipment.label</div>
-  <h2 class="section-title reveal"><span class="dim">02 /</span> <span data-i18n>equipment.title</span></h2>
-  <p class="section-desc reveal" data-i18n>equipment.desc</p>
+  <div class="section-label reveal" data-i18n="equipment.label">设备能力</div>
+  <h2 class="section-title reveal"><span class="dim">02 /</span> <span data-i18n="equipment.title">高端数控装备 · 精度保障</span></h2>
+  <p class="section-desc reveal" data-i18n="equipment.desc">配备多台进口五轴加工中心、车铣复合机床、慢走丝线切割机及全套检测设备，满足从粗加工到精加工的完整工艺链。</p>
 
   <div class="equipment-grid reveal-stagger">
     <div class="equipment-card">
       <div class="equipment-num">01</div>
-      <div>
-        <h3 data-i18n>equipment.e1.title</h3>
-        <p data-i18n>equipment.e1.desc</p>
-      </div>
+      <div><h3 data-i18n="equipment.e1.title">五轴联动加工中心</h3><p data-i18n="equipment.e1.desc">进口五轴加工中心，支持复杂曲面一次装夹完成，避免多次装夹累积误差。</p></div>
     </div>
     <div class="equipment-card">
       <div class="equipment-num">02</div>
-      <div>
-        <h3 data-i18n>equipment.e2.title</h3>
-        <p data-i18n>equipment.e2.desc</p>
-      </div>
+      <div><h3 data-i18n="equipment.e2.title">车铣复合机床</h3><p data-i18n="equipment.e2.desc">车削与铣削一体化加工，减少工序流转，提升效率与同轴度。</p></div>
     </div>
     <div class="equipment-card">
       <div class="equipment-num">03</div>
-      <div>
-        <h3 data-i18n>equipment.e3.title</h3>
-        <p data-i18n>equipment.e3.desc</p>
-      </div>
+      <div><h3 data-i18n="equipment.e3.title">慢走丝线切割</h3><p data-i18n="equipment.e3.desc">微米级线切割精度，胜任硬质合金、淬火钢等高硬度材料的精密加工。</p></div>
     </div>
     <div class="equipment-card">
       <div class="equipment-num">04</div>
-      <div>
-        <h3 data-i18n>equipment.e4.title</h3>
-        <p data-i18n>equipment.e4.desc</p>
-      </div>
+      <div><h3 data-i18n="equipment.e4.title">三坐标测量仪</h3><p data-i18n="equipment.e4.desc">全自动三坐标测量，实现微米级尺寸检测，确保每件产品符合设计公差。</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ STATS BAR ═══════════════════ -->
+<!-- ═══════ STATS BAR ═══════ -->
 <div class="stats-bar reveal" data-i18n-attr="aria-label:stats.ariaLabel" aria-label="工作室数据">
   <div class="stats-grid">
     <div class="stat-item">
       <div class="stat-value">±0.005<span class="unit">mm</span></div>
-      <div class="stat-label" data-i18n>stats.s1.label</div>
+      <div class="stat-label" data-i18n="stats.s1.label">最高定位精度</div>
     </div>
     <div class="stat-item">
       <div class="stat-value">12<span class="unit">+</span></div>
-      <div class="stat-label" data-i18n>stats.s2.label</div>
+      <div class="stat-label" data-i18n="stats.s2.label">高端数控设备</div>
     </div>
     <div class="stat-item">
       <div class="stat-value">30<span class="unit">+</span></div>
-      <div class="stat-label" data-i18n>stats.s3.label</div>
+      <div class="stat-label" data-i18n="stats.s3.label">可加工材料种类</div>
     </div>
     <div class="stat-item">
       <div class="stat-value">72<span class="unit">h</span></div>
-      <div class="stat-label" data-i18n>stats.s4.label</div>
+      <div class="stat-label" data-i18n="stats.s4.label">最快打样周期</div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════ PROCESS ═══════════════════ -->
+<!-- ═══════ PROCESS ═══════ -->
 <section class="section" id="process">
-  <div class="section-label reveal" data-i18n>process.label</div>
-  <h2 class="section-title reveal"><span class="dim">03 /</span> <span data-i18n>process.title</span></h2>
-  <p class="section-desc reveal" data-i18n>process.desc</p>
+  <div class="section-label reveal" data-i18n="process.label">工艺流程</div>
+  <h2 class="section-title reveal"><span class="dim">03 /</span> <span data-i18n="process.title">6步品控 · 精密制造</span></h2>
+  <p class="section-desc reveal" data-i18n="process.desc">从图纸评审到成品交付，每一步都坚持严苛标准。我们相信，好的工艺不仅靠设备，更靠流程管控。</p>
 
   <div class="process-steps reveal-stagger">
     <div class="process-step">
-      <h3 data-i18n>process.step1.title</h3>
-      <p data-i18n>process.step1.desc</p>
+      <h3 data-i18n="process.step1.title">图纸评审</h3>
+      <p data-i18n="process.step1.desc">工程师进行 DFM 可制造性分析，评估公差合理性、加工可行性，给出优化建议。</p>
     </div>
     <div class="process-step">
-      <h3 data-i18n>process.step2.title</h3>
-      <p data-i18n>process.step2.desc</p>
+      <h3 data-i18n="process.step2.title">工艺规划</h3>
+      <p data-i18n="process.step2.desc">制定加工路线、选择刀具与切削参数，编制 CAM 程序并进行仿真验证。</p>
     </div>
     <div class="process-step">
-      <h3 data-i18n>process.step3.title</h3>
-      <p data-i18n>process.step3.desc</p>
+      <h3 data-i18n="process.step3.title">粗加工</h3>
+      <p data-i18n="process.step3.desc">快速去除大余量，预留精加工余量，同时控制工件变形与内应力。</p>
     </div>
     <div class="process-step">
-      <h3 data-i18n>process.step4.title</h3>
-      <p data-i18n>process.step4.desc</p>
+      <h3 data-i18n="process.step4.title">精加工</h3>
+      <p data-i18n="process.step4.desc">高精度切削至最终尺寸，严格控制表面粗糙度与形位公差。</p>
     </div>
     <div class="process-step">
-      <h3 data-i18n>process.step5.title</h3>
-      <p data-i18n>process.step5.desc</p>
+      <h3 data-i18n="process.step5.title">质量检测</h3>
+      <p data-i18n="process.step5.desc">三坐标全尺寸测量 + 粗糙度检测 + 外观检查，逐件出具 FAI 检测报告。</p>
     </div>
     <div class="process-step">
-      <h3 data-i18n>process.step6.title</h3>
-      <p data-i18n>process.step6.desc</p>
+      <h3 data-i18n="process.step6.title">清洗包装</h3>
+      <p data-i18n="process.step6.desc">超声波清洗去除油污碎屑，防锈处理后真空封装，确保运输零损伤。</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ PORTFOLIO ═══════════════════ -->
+<!-- ═══════ PORTFOLIO ═══════ -->
 <section class="section" id="portfolio">
-  <div class="section-label reveal" data-i18n>portfolio.label</div>
-  <h2 class="section-title reveal"><span class="dim">04 /</span> <span data-i18n>portfolio.title</span></h2>
-  <p class="section-desc reveal" data-i18n>portfolio.desc</p>
+  <div class="section-label reveal" data-i18n="portfolio.label">加工案例</div>
+  <h2 class="section-title reveal"><span class="dim">04 /</span> <span data-i18n="portfolio.title">精选案例展示</span></h2>
+  <p class="section-desc reveal" data-i18n="portfolio.desc">覆盖航空航天、医疗器械、半导体、精密仪器等多个领域的典型加工案例。</p>
 
   <div class="portfolio-grid reveal-stagger">
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p1.name" aria-label="航空发动机支架">
       <div class="portfolio-visual"><div class="portfolio-shape"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p1.name</h3>
-        <span class="mat" data-i18n>portfolio.p1.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p1.name">航空发动机支架</h3><span class="mat" data-i18n="portfolio.p1.material">钛合金 TC4</span></div>
     </div>
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p2.name" aria-label="医疗植入物基座">
       <div class="portfolio-visual"><div class="portfolio-shape rect"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p2.name</h3>
-        <span class="mat" data-i18n>portfolio.p2.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p2.name">医疗植入物基座</h3><span class="mat" data-i18n="portfolio.p2.material">316L 不锈钢</span></div>
     </div>
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p3.name" aria-label="精密光学镜筒">
       <div class="portfolio-visual"><div class="portfolio-shape"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p3.name</h3>
-        <span class="mat" data-i18n>portfolio.p3.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p3.name">精密光学镜筒</h3><span class="mat" data-i18n="portfolio.p3.material">铝合金 7075</span></div>
     </div>
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p4.name" aria-label="半导体腔体部件">
       <div class="portfolio-visual"><div class="portfolio-shape rect"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p4.name</h3>
-        <span class="mat" data-i18n>portfolio.p4.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p4.name">半导体腔体部件</h3><span class="mat" data-i18n="portfolio.p4.material">铜合金</span></div>
     </div>
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p5.name" aria-label="高精密齿轮组">
       <div class="portfolio-visual"><div class="portfolio-shape"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p5.name</h3>
-        <span class="mat" data-i18n>portfolio.p5.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p5.name">高精密齿轮组</h3><span class="mat" data-i18n="portfolio.p5.material">40Cr</span></div>
     </div>
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p6.name" aria-label="机器人关节壳体">
       <div class="portfolio-visual"><div class="portfolio-shape rect"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p6.name</h3>
-        <span class="mat" data-i18n>portfolio.p6.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p6.name">机器人关节壳体</h3><span class="mat" data-i18n="portfolio.p6.material">铝合金 6061</span></div>
     </div>
     <div class="portfolio-item" data-i18n-attr="aria-label:portfolio.p7.name" aria-label="液冷散热模块">
       <div class="portfolio-visual"><div class="portfolio-shape"></div></div>
-      <div class="portfolio-info">
-        <h3 data-i18n>portfolio.p7.name</h3>
-        <span class="mat" data-i18n>portfolio.p7.material</span>
-      </div>
+      <div class="portfolio-info"><h3 data-i18n="portfolio.p7.name">液冷散热模块</h3><span class="mat" data-i18n="portfolio.p7.material">紫铜 T2</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ CERTS ═══════════════════ -->
+<!-- ═══════ CERTS ═══════ -->
 <section class="section" id="certs">
-  <div class="section-label reveal" data-i18n>certs.label</div>
-  <h2 class="section-title reveal"><span class="dim">05 /</span> <span data-i18n>certs.title</span></h2>
-  <p class="section-desc reveal" data-i18n>certs.desc</p>
+  <div class="section-label reveal" data-i18n="certs.label">资质认证</div>
+  <h2 class="section-title reveal"><span class="dim">05 /</span> <span data-i18n="certs.title">国际标准 · 品质保证</span></h2>
+  <p class="section-desc reveal" data-i18n="certs.desc">严格遵循国际质量管理体系，以规范化流程确保每一次交付的可靠与一致。</p>
 
   <div class="certs-grid reveal-stagger">
     <div class="cert-card">
-      <div class="cert-icon">
-        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg>
-      </div>
-      <h3 data-i18n>certs.c1.name</h3>
-      <p data-i18n>certs.c1.desc</p>
+      <div class="cert-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg></div>
+      <h3 data-i18n="certs.c1.name">ISO 9001</h3><p data-i18n="certs.c1.desc">质量管理体系认证</p>
     </div>
     <div class="cert-card">
-      <div class="cert-icon">
-        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg>
-      </div>
-      <h3 data-i18n>certs.c2.name</h3>
-      <p data-i18n>certs.c2.desc</p>
+      <div class="cert-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg></div>
+      <h3 data-i18n="certs.c2.name">ISO 13485</h3><p data-i18n="certs.c2.desc">医疗器械质量管理体系</p>
     </div>
     <div class="cert-card">
-      <div class="cert-icon">
-        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg>
-      </div>
-      <h3 data-i18n>certs.c3.name</h3>
-      <p data-i18n>certs.c3.desc</p>
+      <div class="cert-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg></div>
+      <h3 data-i18n="certs.c3.name">AS9100</h3><p data-i18n="certs.c3.desc">航空航天质量管理体系</p>
     </div>
     <div class="cert-card">
-      <div class="cert-icon">
-        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg>
-      </div>
-      <h3 data-i18n>certs.c4.name</h3>
-      <p data-i18n>certs.c4.desc</p>
+      <div class="cert-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg></div>
+      <h3 data-i18n="certs.c4.name">IATF 16949</h3><p data-i18n="certs.c4.desc">汽车行业质量体系</p>
     </div>
     <div class="cert-card">
-      <div class="cert-icon">
-        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg>
-      </div>
-      <h3 data-i18n>certs.c5.name</h3>
-      <p data-i18n>certs.c5.desc</p>
+      <div class="cert-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg></div>
+      <h3 data-i18n="certs.c5.name">RoHS</h3><p data-i18n="certs.c5.desc">有害物质限制合规</p>
     </div>
     <div class="cert-card">
-      <div class="cert-icon">
-        <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg>
-      </div>
-      <h3 data-i18n>certs.c6.name</h3>
-      <p data-i18n>certs.c6.desc</p>
+      <div class="cert-icon"><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M10 14 L13 17 L18 11" stroke="var(--color-accent)" stroke-width="1.5"/></svg></div>
+      <h3 data-i18n="certs.c6.name">CE 认证</h3><p data-i18n="certs.c6.desc">欧盟市场准入标准</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════ CTA ═══════════════════ -->
+<!-- ═══════ CTA ═══════ -->
 <section class="section" id="cta">
-  <div class="section-label reveal" data-i18n>cta.label</div>
-
+  <div class="section-label reveal" data-i18n="cta.label">合作咨询</div>
   <div class="cta-section reveal">
     <div class="cta-text">
-      <h2 data-i18n>cta.title</h2>
-      <p data-i18n>cta.desc</p>
+      <h2 data-i18n="cta.title">开启您的精密制造合作</h2>
+      <p data-i18n="cta.desc">无论单件打样、小批量试产还是规模化量产，我们的技术团队都将为您提供最专业的解决方案。欢迎来厂参观洽谈。</p>
       <div class="cta-actions">
-        <a href="mailto:yujf1007@gmail.com" class="btn btn-primary" data-i18n>cta.btnEmail</a>
-        <a href="tel:+8613392819007" class="btn btn-outline" data-i18n>cta.btnPhone</a>
+        <a href="mailto:yujf1007@gmail.com" class="btn btn-primary" data-i18n="cta.btnEmail">发送询价邮件</a>
+        <a href="tel:+8613392819007" class="btn btn-outline" data-i18n="cta.btnPhone">电话咨询</a>
       </div>
     </div>
-
     <div class="cta-info">
       <div class="cta-info-item">
-        <div class="ico">
-          <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="9" rx="1.5" stroke="var(--color-accent)" stroke-width="1.2"/><path d="M3 5.5 L8 10 L13 5.5" stroke="var(--color-accent)" stroke-width="1.2"/></svg>
-        </div>
+        <div class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="9" rx="1.5" stroke="var(--color-accent)" stroke-width="1.2"/><path d="M3 5.5 L8 10 L13 5.5" stroke="var(--color-accent)" stroke-width="1.2"/></svg></div>
         <span>yujf1007@gmail.com</span>
       </div>
       <div class="cta-info-item">
-        <div class="ico">
-          <svg viewBox="0 0 16 16" fill="none"><path d="M3 3.5 L7 1.5 L11 3.5 L13 6.5 L13 13C13 13.8 12.3 14.5 11.5 14.5H4.5C3.7 14.5 3 13.8 3 13V6.5L3 3.5Z" stroke="var(--color-accent)" stroke-width="1.2"/></svg>
-        </div>
-        <span data-i18n>cta.contactPerson</span>
+        <div class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3.5 L7 1.5 L11 3.5 L13 6.5 L13 13C13 13.8 12.3 14.5 11.5 14.5H4.5C3.7 14.5 3 13.8 3 13V6.5L3 3.5Z" stroke="var(--color-accent)" stroke-width="1.2"/></svg></div>
+        <span data-i18n="cta.contactPerson">联系人：余先生</span>
       </div>
       <div class="cta-info-item">
-        <div class="ico">
-          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="var(--color-accent)" stroke-width="1.2"/><path d="M4 13 C4 10 6 8 8 8 C10 8 12 10 12 13" stroke="var(--color-accent)" stroke-width="1.2"/></svg>
-        </div>
+        <div class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="var(--color-accent)" stroke-width="1.2"/><path d="M4 13 C4 10 6 8 8 8 C10 8 12 10 12 13" stroke="var(--color-accent)" stroke-width="1.2"/></svg></div>
         <span>+86-13392819007</span>
       </div>
       <div class="cta-info-item">
-        <div class="ico">
-          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="var(--color-accent)" stroke-width="1.2"/><circle cx="8" cy="8" r="1.5" fill="var(--color-accent)" opacity="0.5"/></svg>
-        </div>
-        <span data-i18n>cta.address</span>
+        <div class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="var(--color-accent)" stroke-width="1.2"/><circle cx="8" cy="8" r="1.5" fill="var(--color-accent)" opacity="0.5"/></svg></div>
+        <span data-i18n="cta.address">湖北省黄梅县小池镇吴楚大道临港工业区4888号（临港产业园内）</span>
       </div>
     </div>
   </div>
@@ -1302,7 +848,7 @@ body {
 
 </main>
 
-<!-- ═══════════════════ FLOATING CONTACT ═══════════════════ -->
+<!-- ═══════ FLOATING CONTACT ═══════ -->
 <button class="float-btn" id="floatBtn" aria-label="微信联系">
   <svg viewBox="0 0 24 24"><path d="M8.69 13.44c.56-.01 1.2-.35 1.53-.75.33-.4.79-.31 1.11-.09.32.22 2.12 1.32 2.56 1.59.44.27.52.44.12.85-.4.41-1.51 1.48-1.81 1.59-.3.11-.64.15-.97-.04-.33-.19-1.57-1.1-2.97-2.43-1.1-1.06-1.84-2.1-2.06-2.49-.22-.39-.03-.77.19-1.07.22-.3 1.06-1.31 1.39-1.69.33-.38.66-.27.91 0 .25.27.32.38.46.68.14.3.08.65-.03.86-.11.21-.27.44-.37.57-.1.13-.15.27.02.43.17.16.94 1.01 1.95 1.6.78.46 1.16.65 1.43.37.27-.28.78-.92.97-1.19.19-.27.41-.22.69-.08.28.14 1.7.82 2 1.02.3.2.43.35.33.62-.1.27-.33.78-.56 1.2zM9.5 2.5A9.5 9.5 0 002 12c0 1.66.44 3.26 1.25 4.65L2 22l5.62-1.25A9.45 9.45 0 009.5 22 9.5 9.5 0 0019 12.5 9.5 9.5 0 009.5 2.5zm0 1.69a7.81 7.81 0 017.81 7.81 7.81 7.81 0 01-7.81 7.81c-1.21 0-2.39-.27-3.45-.79l-.3-.15-3.32.74.74-3.24-.17-.31a7.74 7.74 0 01-.81-4.06 7.81 7.81 0 017.31-7.81z" fill="var(--color-inverse)"/></svg>
 </button>
@@ -1312,105 +858,89 @@ body {
   <p>微信扫码联系</p>
 </div>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<!-- ═══════ FOOTER ═══════ -->
 <footer class="footer">
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="brand-name" data-i18n>common.brand</div>
-      <p data-i18n>footer.desc</p>
+      <div class="brand-name" data-i18n="common.brand">CNC STUDIO</div>
+      <p data-i18n="footer.desc">CNC Studio 精密数控加工工作室，专注五轴铣削、车铣复合、慢走丝线切割。±0.005mm 精度，服务航空航天、医疗器械、精密仪器等领域。</p>
     </div>
     <div class="footer-col">
-      <h4 data-i18n>footer.col1Title</h4>
+      <h4 data-i18n="footer.col1Title">加工服务</h4>
       <ul>
-        <li><a href="#services" data-i18n>footer.col1.l1</a></li>
-        <li><a href="#services" data-i18n>footer.col1.l2</a></li>
-        <li><a href="#services" data-i18n>footer.col1.l3</a></li>
-        <li><a href="#services" data-i18n>footer.col1.l4</a></li>
+        <li><a href="#services" data-i18n="footer.col1.l1">CNC 铣削</a></li>
+        <li><a href="#services" data-i18n="footer.col1.l2">CNC 车削</a></li>
+        <li><a href="#services" data-i18n="footer.col1.l3">线切割 / EDM</a></li>
+        <li><a href="#services" data-i18n="footer.col1.l4">表面处理</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4 data-i18n>footer.col2Title</h4>
+      <h4 data-i18n="footer.col2Title">关于我们</h4>
       <ul>
-        <li><a href="#equipment" data-i18n>footer.col2.l1</a></li>
-        <li><a href="#equipment" data-i18n>footer.col2.l2</a></li>
-        <li><a href="#process" data-i18n>footer.col2.l3</a></li>
-        <li><a href="#certs" data-i18n>footer.col2.l4</a></li>
+        <li><a href="#equipment" data-i18n="footer.col2.l1">工作室介绍</a></li>
+        <li><a href="#equipment" data-i18n="footer.col2.l2">设备能力</a></li>
+        <li><a href="#process" data-i18n="footer.col2.l3">工艺流程</a></li>
+        <li><a href="#certs" data-i18n="footer.col2.l4">资质认证</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4 data-i18n>footer.col3Title</h4>
+      <h4 data-i18n="footer.col3Title">服务支持</h4>
       <ul>
-        <li><a href="#cta" data-i18n>footer.col3.l1</a></li>
-        <li><a href="#cta" data-i18n>footer.col3.l2</a></li>
-        <li><a href="#cta" data-i18n>footer.col3.l3</a></li>
-        <li><a href="#cta" data-i18n>footer.col3.l4</a></li>
+        <li><a href="#cta" data-i18n="footer.col3.l1">OEM/ODM 定制</a></li>
+        <li><a href="#cta" data-i18n="footer.col3.l2">技术咨询</a></li>
+        <li><a href="#cta" data-i18n="footer.col3.l3">DFM 可制造性分析</a></li>
+        <li><a href="#cta" data-i18n="footer.col3.l4">快速打样</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span data-i18n>footer.copyright</span>
-    <span data-i18n>footer.icp</span>
+    <span data-i18n="footer.copyright">© 2026 CNC Studio. All rights reserved.</span>
+    <span data-i18n="footer.icp">鄂ICP备XXXXXXXX号-1</span>
   </div>
 </footer>
 
-<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
 <script src="js/i18n.js"></script>
 <script>
 (function () {
   'use strict';
 
-  // ── Navigation scroll effect ──
-  const nav = document.getElementById('nav');
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
     nav.classList.toggle('scrolled', y > 40);
-    lastScroll = y;
-    // Active nav link
-    const sections = document.querySelectorAll('section[id], .section[id]');
-    const links = document.querySelectorAll('#navLinks a');
-    let current = '';
-    sections.forEach(sec => {
-      const top = sec.offsetTop - 120;
-      if (y >= top) current = sec.getAttribute('id');
+    var sections = document.querySelectorAll('section[id]');
+    var links = document.querySelectorAll('#navLinks a');
+    var current = '';
+    sections.forEach(function (sec) {
+      if (y >= sec.offsetTop - 120) current = sec.getAttribute('id');
     });
-    links.forEach(link => {
+    links.forEach(function (link) {
       link.classList.toggle('active', link.getAttribute('href') === '#' + current);
     });
   });
 
-  // ── Mobile menu ──
-  const toggle = document.getElementById('mobileToggle');
-  const mobileNav = document.getElementById('navMobile');
-  const body = document.body;
+  var toggle = document.getElementById('mobileToggle');
+  var mobileNav = document.getElementById('navMobile');
+  var body = document.body;
 
   function openMenu() {
-    toggle.classList.add('active');
-    mobileNav.classList.add('open');
+    toggle.classList.add('active'); mobileNav.classList.add('open');
     body.style.overflow = 'hidden';
-    toggle.setAttribute('aria-label', (window.I18N && window.I18N.t('nav.menuClose')) || '关闭菜单');
+    toggle.setAttribute('aria-label', '关闭菜单');
   }
-
   function closeMenu() {
-    toggle.classList.remove('active');
-    mobileNav.classList.remove('open');
+    toggle.classList.remove('active'); mobileNav.classList.remove('open');
     body.style.overflow = '';
-    toggle.setAttribute('aria-label', (window.I18N && window.I18N.t('nav.menuOpen')) || '打开菜单');
+    toggle.setAttribute('aria-label', '打开菜单');
   }
 
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', function () {
     mobileNav.classList.contains('open') ? closeMenu() : openMenu();
   });
 
-  mobileNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
+  mobileNav.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeMenu); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
-  });
-
-  // ── Language switchers ──
   document.getElementById('langSwitcher').addEventListener('change', function () {
     if (window.I18N) window.I18N.setLang(this.value);
   });
@@ -1418,48 +948,31 @@ body {
     if (window.I18N) window.I18N.setLang(this.value);
   });
 
-  // ── Scroll reveal ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) { observer.observe(el); });
 
-  // ── Floating contact QR ──
-  const floatBtn = document.getElementById('floatBtn');
-  const qrPopup = document.getElementById('qrPopup');
-
-  floatBtn.addEventListener('click', () => {
-    qrPopup.classList.toggle('visible');
+  var floatBtn = document.getElementById('floatBtn');
+  var qrPopup = document.getElementById('qrPopup');
+  floatBtn.addEventListener('click', function () { qrPopup.classList.toggle('visible'); });
+  document.addEventListener('click', function (e) {
+    if (!floatBtn.contains(e.target) && !qrPopup.contains(e.target)) qrPopup.classList.remove('visible');
   });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') qrPopup.classList.remove('visible'); });
 
-  document.addEventListener('click', (e) => {
-    if (!floatBtn.contains(e.target) && !qrPopup.contains(e.target)) {
-      qrPopup.classList.remove('visible');
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') qrPopup.classList.remove('visible');
-  });
-
-  // ── Hero rings parallax ──
-  const rings = document.querySelectorAll('.hero-ring');
+  var rings = document.querySelectorAll('.hero-ring');
   if (rings.length && window.matchMedia('(min-width: 1025px)').matches) {
-    window.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 24;
-      const y = (e.clientY / window.innerHeight - 0.5) * 24;
-      rings.forEach((ring, i) => {
-        const f = (i + 1) * 0.12;
-        ring.style.transform = `translate(calc(-50% + ${x * f}px), calc(-50% + ${y * f}px))`;
+    window.addEventListener('mousemove', function (e) {
+      var x = (e.clientX / window.innerWidth - 0.5) * 24;
+      var y = (e.clientY / window.innerHeight - 0.5) * 24;
+      rings.forEach(function (ring, i) {
+        var f = (i + 1) * 0.12;
+        ring.style.transform = 'translate(calc(-50% + ' + (x * f) + 'px), calc(-50% + ' + (y * f) + 'px))';
       });
     });
   }
-
 })();
 </script>
 
