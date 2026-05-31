@@ -138,12 +138,19 @@ body {
 
 .lang-switcher {
   font-family: var(--font-mono); font-size: var(--text-xs);
-  letter-spacing: 0.06em; color: var(--color-secondary);
-  background: transparent; border: 1px solid var(--color-border);
+  letter-spacing: 0.06em; color: var(--color-primary);
+  background: var(--color-surface); border: 1px solid var(--color-border);
   padding: 6px 10px; cursor: pointer; outline: none;
   border-radius: var(--radius-sm); transition: border-color var(--ease-out), color var(--ease-out);
+  -webkit-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23959da6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  padding-right: 28px;
 }
-.lang-switcher:hover { border-color: var(--color-accent); color: var(--color-primary); }
+.lang-switcher:hover { border-color: var(--color-accent); color: var(--color-accent-light); }
+.lang-switcher option {
+  background: var(--color-surface); color: var(--color-primary);
+}
 
 .nav-cta {
   font-family: var(--font-mono); font-size: var(--text-xs);
