@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNC Studio — 精密数控加工</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #08090b;
+  --bg-surface: #111318;
+  --bg-elevated: #181b21;
+  --metal-cool: #8a929b;
+  --metal-warm: #b8a99a;
+  --accent: #f08800;
+  --accent-glow: #ffb443;
+  --text-primary: #e6e8ec;
+  --text-secondary: #959da6;
+  --text-muted: #5a6270;
+  --border: #232832;
+  --radius: 2px;
+  --grid-size: 60px;
+  --transition: 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Background texture ── */
+#bg-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(240,136,0,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,136,0,0.3) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+#bg-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Navbar ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 48px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background var(--transition), backdrop-filter var(--transition);
+}
+
+.nav.scrolled {
+  background: rgba(8,9,11,0.85);
+  backdrop-filter: blur(16px) saturate(120%);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo .mark {
+  width: 32px; height: 32px;
+  border: 2px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem;
+  color: var(--accent);
+  position: relative;
+}
+
+.nav-logo .mark::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid rgba(240,136,0,0.25);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-links a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition);
+}
+
+.nav-links a:hover { color: var(--accent-glow); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 8px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.nav-cta:hover {
+  background: var(--accent);
+  color: var(--bg-deep);
+  box-shadow: 0 0 24px rgba(240,136,0,0.25);
+}
+
+/* ── Sections ── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 140px 48px;
+}
+
+.section-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 48px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-visual {
+  position: absolute;
+  right: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 680px;
+  height: 680px;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.hero-rings {
+  width: 100%; height: 100%;
+  position: relative;
+}
+
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(240,136,0,0.12);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ringPulse 6s ease-in-out infinite;
+}
+
+.hero-ring:nth-child(1) { width: 180px; height: 180px; animation-delay: 0s; }
+.hero-ring:nth-child(2) { width: 340px; height: 340px; animation-delay: 0.5s; }
+.hero-ring:nth-child(3) { width: 500px; height: 500px; animation-delay: 1s; }
+.hero-ring:nth-child(4) { width: 660px; height: 660px; animation-delay: 1.5s; }
+.hero-ring:nth-child(5) { width: 820px; height: 820px; animation-delay: 2s; }
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+.hero-crosshair {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px;
+}
+
+.hero-crosshair::before,
+.hero-crosshair::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+.hero-crosshair::before {
+  width: 100%; height: 1px;
+  top: 50%;
+}
+
+.hero-crosshair::after {
+  width: 1px; height: 100%;
+  left: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.hero-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero-title .highlight {
+  color: var(--accent);
+  position: relative;
+}
+
+.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent);
+  opacity: 0.2;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-bottom: 44px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 32px;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg-deep);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.btn-primary:hover {
+  background: var(--accent-glow);
+  box-shadow: 0 0 40px rgba(240,136,0,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  background: transparent;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.btn-ghost:hover {
+  border-color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 60px;
+  margin-top: 80px;
+  opacity: 0;
+  animation: fadeUp 0.8s 1s forwards;
+}
+
+.hero-stat-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ── About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+
+.about-geo {
+  position: absolute;
+  inset: 40px;
+  border: 1px solid var(--border);
+}
+
+.about-geo-lines {
+  position: absolute;
+  inset: 0;
+}
+
+.about-geo-lines line {
+  stroke: rgba(240,136,0,0.08);
+  stroke-width: 1;
+}
+
+.about-geo-dot {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  top: 30%; left: 25%;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.about-geo-dot:nth-child(2) { top: 55%; left: 60%; }
+.about-geo-dot:nth-child(3) { top: 20%; left: 70%; }
+
+.about-text h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.about-text p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 16px;
+  max-width: 480px;
+}
+
+.about-capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.cap-item {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--metal-cool);
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cap-item::before {
+  content: '◇';
+  font-size: 0.4rem;
+  color: var(--accent);
+}
+
+/* ── Services ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.service-card {
+  background: var(--bg-surface);
+  padding: 48px 36px;
+  transition: background var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  background: var(--bg-elevated);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-icon {
+  width: 48px; height: 48px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.service-icon svg {
+  width: 100%; height: 100%;
+}
+
+.service-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.service-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.service-spec {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--metal-cool);
+  padding: 4px 10px;
+  border: 1px solid rgba(138,146,155,0.2);
+}
+
+/* ── Portfolio ── */
+.portfolio-masonry {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  grid-auto-flow: dense;
+}
+
+.portfolio-item {
+  position: relative;
+  background: var(--bg-elevated);
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+}
+
+.portfolio-item:nth-child(1) { grid-column: span 4; aspect-ratio: 4/3; }
+.portfolio-item:nth-child(2) { grid-column: span 4; aspect-ratio: 4/3; }
+.portfolio-item:nth-child(3) { grid-column: span 4; aspect-ratio: 4/3; }
+.portfolio-item:nth-child(4) { grid-column: span 3; }
+.portfolio-item:nth-child(5) { grid-column: span 3; }
+.portfolio-item:nth-child(6) { grid-column: span 3; }
+.portfolio-item:nth-child(7) { grid-column: span 3; }
+
+.portfolio-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(240,136,0,0.06) 0%, transparent 60%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-item:hover .portfolio-placeholder {
+  transform: scale(1.05);
+}
+
+.portfolio-placeholder .shape {
+  width: 60%; height: 60%;
+  border: 2px solid rgba(240,136,0,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+.portfolio-placeholder .shape::after {
+  content: '';
+  position: absolute;
+  width: 30%; height: 30%;
+  border-radius: 50%;
+  background: rgba(240,136,0,0.12);
+}
+
+.portfolio-placeholder .shape.square {
+  border-radius: 4px;
+}
+
+.portfolio-placeholder .shape.square::after {
+  border-radius: 2px;
+}
+
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8,9,11,0.9) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio-overlay span {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-glow);
+  text-transform: uppercase;
+}
+
+/* ── Tech specs ── */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.tech-card {
+  background: var(--bg-surface);
+  padding: 40px 28px;
+  text-align: center;
+}
+
+.tech-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.tech-unit {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.tech-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── Contact ── */
+.contact-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.contact-form .full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field label {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(240,136,0,0.08);
+}
+
+.form-field textarea { min-height: 120px; resize: vertical; }
+
+.form-submit {
+  margin-top: 8px;
+}
+
+.form-submit .btn { width: 100%; justify-content: center; }
+
+.success-msg {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--accent-glow);
+  letter-spacing: 0.1em;
+}
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 48px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-info {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.footer-info .brand {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--text-secondary);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.footer-social {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-social a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-social a:hover { color: var(--accent); }
+
+/* ── Section title ── */
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 48px;
+}
+
+.section-title .dim {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile nav ── */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 101;
+}
+
+.mobile-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.mobile-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 1024px) {
+  .hero-visual { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 24px; }
+  .hero { padding: 0 24px; }
+  .nav { padding: 0 24px; }
+
+  .mobile-toggle { display: flex; }
+
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(8,9,11,0.96);
+    backdrop-filter: blur(16px);
+    gap: 32px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+  }
+
+  .nav-links.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a { font-size: 1rem; }
+  .nav-cta { display: none; }
+
+  .hero-stats { gap: 32px; flex-wrap: wrap; }
+  .hero-stat-value { font-size: 1.5rem; }
+
+  .portfolio-masonry { grid-template-columns: 1fr; }
+  .portfolio-item:nth-child(n) { grid-column: span 1; aspect-ratio: 4/3; }
+
+  .contact-form { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .tech-grid { grid-template-columns: 1fr; }
+  .about-capabilities { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="bg-grid"></div>
+<div id="bg-noise"></div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <span class="mark">CNC</span>
+    <span>STUDIO</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">关于</a></li>
+    <li><a href="#services">服务</a></li>
+    <li><a href="#portfolio">作品</a></li>
+    <li><a href="#tech">技术</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">询价</a>
+  <div class="mobile-toggle" id="mobileToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-visual">
+    <div class="hero-rings">
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+      <div class="hero-ring"></div>
+    </div>
+    <div class="hero-crosshair"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-tag">Precision CNC Machining</p>
+    <h1 class="hero-title">
+      将金属<br>变成<span class="highlight">精度</span>
+    </h1>
+    <p class="hero-subtitle">
+      我们致力于高精度数控加工，以 ±0.005mm 的公差标准，为航空航天、医疗器械、精密仪器等领域提供可靠的零部件制造服务。
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">获取报价</a>
+      <a href="#services" class="btn btn-ghost">了解更多 ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-value">±0.005</div>
+        <div class="hero-stat-label">加工精度 / mm</div>
+      </div>
+      <div>
+        <div class="hero-stat-value">15+</div>
+        <div class="hero-stat-label">行业经验 / 年</div>
+      </div>
+      <div>
+        <div class="hero-stat-value">2000+</div>
+        <div class="hero-stat-label">完成项目</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="section" id="about">
+  <div class="section-label reveal">关于我们</div>
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-geo">
+        <svg class="about-geo-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <line x1="0" y1="20" x2="100" y2="20"/>
+          <line x1="0" y1="50" x2="100" y2="50"/>
+          <line x1="0" y1="80" x2="100" y2="80"/>
+          <line x1="20" y1="0" x2="20" y2="100"/>
+          <line x1="50" y1="0" x2="50" y2="100"/>
+          <line x1="80" y1="0" x2="80" y2="100"/>
+        </svg>
+        <div class="about-geo-dot"></div>
+        <div class="about-geo-dot"></div>
+        <div class="about-geo-dot"></div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <h2>以技术为信仰<br>以精度为标准</h2>
+      <p>
+        CNC Studio 成立于 2011 年，是一家专注于高精度数控加工的技术型工作室。
+        我们拒绝「差不多」——每一个零件都经过严格的工艺规划和质量检测，
+        确保交付的每一件产品都经得起千分尺的考验。
+      </p>
+      <p>
+        从单件打样到批量生产，我们始终用数据说话。
+        五轴联动、车铣复合、慢走丝线切割——我们不追求设备的堆砌，
+        而是让每一台机器发挥它最大的精度潜力。
+      </p>
+      <div class="about-capabilities">
+        <div class="cap-item">五轴联动加工</div>
+        <div class="cap-item">车铣复合</div>
+        <div class="cap-item">±0.005mm 公差</div>
+        <div class="cap-item">ISO 9001 认证</div>
+        <div class="cap-item">72h 快速打样</div>
+        <div class="cap-item">全尺寸检测报告</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="section" id="services">
+  <div class="section-label reveal">服务范围</div>
+  <h2 class="section-title reveal">
+    <span class="dim">01 /</span> 精密加工服务
+  </h2>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="var(--accent)" stroke-width="1.5" opacity="0.3"/>
+          <circle cx="24" cy="24" r="15" stroke="var(--accent)" stroke-width="1"/>
+          <circle cx="24" cy="24" r="6" fill="var(--accent)" opacity="0.2"/>
+          <circle cx="24" cy="24" r="3" fill="var(--accent)" opacity="0.6"/>
+        </svg>
+      </div>
+      <h3>CNC 铣削</h3>
+      <p>三轴、四轴、五轴联动铣削加工，覆盖铝合金、钛合金、不锈钢、工程塑料等各类材料。</p>
+      <div class="service-specs">
+        <span class="service-spec">±0.005mm</span>
+        <span class="service-spec">5-Axis</span>
+        <span class="service-spec">800×500mm</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <rect x="8" y="14" width="32" height="20" rx="2" stroke="var(--accent)" stroke-width="1.5"/>
+          <line x1="24" y1="8" x2="24" y2="14" stroke="var(--accent)" stroke-width="1"/>
+          <circle cx="24" cy="24" r="4" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+        </svg>
+      </div>
+      <h3>CNC 车削</h3>
+      <p>精密数控车床加工，支持车铣复合，适合轴类、盘类、套类零件的批量高效生产。</p>
+      <div class="service-specs">
+        <span class="service-spec">±0.003mm</span>
+        <span class="service-spec">Φ400mm</span>
+        <span class="service-spec">L=600mm</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <path d="M10 38 L24 10 L38 38" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+          <circle cx="24" cy="28" r="3" fill="var(--accent)" opacity="0.3"/>
+          <line x1="24" y1="20" x2="24" y2="25" stroke="var(--accent)" stroke-width="1"/>
+        </svg>
+      </div>
+      <h3>线切割 / EDM</h3>
+      <p>慢走丝线切割与电火花加工，解决超硬材料和复杂内腔结构的高精度加工难题。</p>
+      <div class="service-specs">
+        <span class="service-spec">±0.002mm</span>
+        <span class="service-spec">慢走丝</span>
+        <span class="service-spec">Max 400mm</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="6" width="36" height="36" stroke="var(--accent)" stroke-width="1.5" opacity="0.3"/>
+          <rect x="14" y="10" width="20" height="28" stroke="var(--accent)" stroke-width="1"/>
+          <line x1="20" y1="14" x2="28" y2="14" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+          <line x1="20" y1="28" x2="28" y2="28" stroke="var(--accent)" stroke-width="1" opacity="0.5"/>
+        </svg>
+      </div>
+      <h3>表面处理</h3>
+      <p>阳极氧化、电镀、喷砂、钝化、发黑等全系列表面处理，让零件由内而外达到交付标准。</p>
+      <div class="service-specs">
+        <span class="service-spec">阳极氧化</span>
+        <span class="service-spec">硬质氧化</span>
+        <span class="service-spec">镀镍/镀锌</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="20" stroke="var(--accent)" stroke-width="1.5" opacity="0.2"/>
+          <path d="M16 24 L22 30 L32 18" stroke="var(--accent)" stroke-width="2"/>
+        </svg>
+      </div>
+      <h3>质量检测</h3>
+      <p>三坐标测量、影像测量、粗糙度仪——每件产品附带全尺寸检验报告，数据透明可追溯。</p>
+      <div class="service-specs">
+        <span class="service-spec">CMM 检测</span>
+        <span class="service-spec">影像测量</span>
+        <span class="service-spec">FAI 报告</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <path d="M8 28 L24 8 L40 28 L32 40 L16 40 Z" stroke="var(--accent)" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="8" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+        </svg>
+      </div>
+      <h3>工程咨询</h3>
+      <p>DFM 可制造性分析、工艺路线优化、材料选型建议——我们不只是加工，更帮你把设计做对。</p>
+      <div class="service-specs">
+        <span class="service-spec">DFM</span>
+        <span class="service-spec">工艺优化</span>
+        <span class="service-spec">逆向工程</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PORTFOLIO ═══════════ -->
+<section class="section" id="portfolio">
+  <div class="section-label reveal">精选作品</div>
+  <h2 class="section-title reveal">
+    <span class="dim">02 /</span> 加工案例
+  </h2>
+
+  <div class="portfolio-masonry reveal">
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape"></div>
+      </div>
+      <div class="portfolio-overlay"><span>航空发动机支架 / 钛合金 TC4</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape square"></div>
+      </div>
+      <div class="portfolio-overlay"><span>医疗植入物基座 / 316L 不锈钢</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape"></div>
+      </div>
+      <div class="portfolio-overlay"><span>精密光学镜筒 / 铝合金 7075</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape square"></div>
+      </div>
+      <div class="portfolio-overlay"><span>半导体腔体部件 / 铜合金</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape"></div>
+      </div>
+      <div class="portfolio-overlay"><span>高精密齿轮组 / 40Cr</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape square"></div>
+      </div>
+      <div class="portfolio-overlay"><span>机器人关节壳体 / 铝合金 6061</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-placeholder">
+        <div class="shape"></div>
+      </div>
+      <div class="portfolio-overlay"><span>液冷散热模块 / 紫铜 T2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TECH ═══════════ -->
+<section class="section" id="tech">
+  <div class="section-label reveal">技术实力</div>
+  <h2 class="section-title reveal">
+    <span class="dim">03 /</span> 设备与能力
+  </h2>
+
+  <div class="tech-grid reveal">
+    <div class="tech-card">
+      <div class="tech-value">5<span class="tech-unit"> 轴</span></div>
+      <div class="tech-label">五轴联动加工中心</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">±0.005<span class="tech-unit">mm</span></div>
+      <div class="tech-label">最高定位精度</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">800<span class="tech-unit">×500</span></div>
+      <div class="tech-label">最大加工行程 / mm</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">24000<span class="tech-unit">rpm</span></div>
+      <div class="tech-label">最高主轴转速</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">12<span class="tech-unit">+</span></div>
+      <div class="tech-label">高端数控设备</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">ISO<span class="tech-unit">9001</span></div>
+      <div class="tech-label">质量管理体系</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">30<span class="tech-unit">+</span></div>
+      <div class="tech-label">可加工材料种类</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-value">72<span class="tech-unit">h</span></div>
+      <div class="tech-label">最快打样周期</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="section" id="contact">
+  <div class="section-label reveal">联系我们</div>
+  <h2 class="section-title reveal" style="text-align:center">
+    <span class="dim">04 /</span> 开启合作
+  </h2>
+
+  <div class="contact-wrapper reveal">
+    <form class="contact-form" id="contactForm">
+      <div class="form-field">
+        <label for="name">姓名 / 公司</label>
+        <input type="text" id="name" placeholder="您的姓名或公司名称" required>
+      </div>
+      <div class="form-field">
+        <label for="email">邮箱</label>
+        <input type="email" id="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label for="phone">电话</label>
+        <input type="tel" id="phone" placeholder="可选">
+      </div>
+      <div class="form-field">
+        <label for="service">服务需求</label>
+        <select id="service">
+          <option value="">请选择</option>
+          <option>CNC 铣削</option>
+          <option>CNC 车削</option>
+          <option>线切割 / EDM</option>
+          <option>表面处理</option>
+          <option>工程咨询</option>
+          <option>其他</option>
+        </select>
+      </div>
+      <div class="form-field full-width">
+        <label for="message">项目描述</label>
+        <textarea id="message" placeholder="请描述您的项目需求，包括材料、数量、公差要求等信息…" required></textarea>
+      </div>
+      <div class="form-submit full-width">
+        <button type="submit" class="btn btn-primary">发送询价</button>
+      </div>
+    </form>
+    <div class="success-msg" id="successMsg">
+      <p style="font-size: 1.2rem; margin-bottom: 8px;">◇ 已收到您的询价</p>
+      <p style="font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text-secondary); letter-spacing: 0;">
+        我们将在 24 小时内与您联系，请保持通讯畅通。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-info">
+    <span class="brand">CNC STUDIO</span> &copy; 2024 — 精密数控加工工作室
+  </div>
+  <div class="footer-social">
+    <a href="#">微信</a>
+    <a href="#">邮箱</a>
+    <a href="#">电话</a>
+  </div>
+</footer>
+
+<script>
+// ── Nav scroll effect ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Mobile menu ──
+const toggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    toggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+// ── Scroll reveal ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Contact form ──
+const form = document.getElementById('contactForm');
+const success = document.getElementById('successMsg');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  form.style.display = 'none';
+  success.style.display = 'block';
+});
+
+// ── Parallax hero rings ──
+const rings = document.querySelectorAll('.hero-ring');
+window.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+  rings.forEach((ring, i) => {
+    const factor = (i + 1) * 0.15;
+    ring.style.transform = `translate(calc(-50% + ${x * factor}px), calc(-50% + ${y * factor}px))`;
+  });
+});
+</script>
+
+</body>
+</html>
